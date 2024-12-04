@@ -1,5 +1,5 @@
 fn celsius_to_kelvin(celsius : f32) -> f32 {
-    return 0.0;
+    celsius + 273.15
 }
 
 #[cfg(test)]
