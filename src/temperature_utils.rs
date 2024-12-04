@@ -5,7 +5,7 @@ fn celsius_decigrades_to_celsius(decigrades: f32) -> f32 {
     decigrades / 10.0
 }
 fn kelvin_to_celisus(kelvin: f32) -> f32 {
-    0.0
+    kelvin - 273.15
 }
 #[cfg(test)]
 mod tests {
