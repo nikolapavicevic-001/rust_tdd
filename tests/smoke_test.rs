@@ -1,6 +1,7 @@
+use rstest::rstest;
 use rust_tdd;
 
-#[test]
+#[rstest]
 pub fn smoke_test() {
    assert_eq!(1,1)
 }
