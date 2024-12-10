@@ -2,6 +2,11 @@ use std::usize;
 
 use mockall::automock;
 
+#[automock]
+pub trait FilterMethods {
+    fn filter_data(&self) -> u32;
+}
+
 pub struct Filter<const N: usize> {
     buffer: [u32; N],
 }
@@ -10,7 +15,10 @@ impl<const N: usize> Filter<N> {
     pub fn new() -> Self {
         Filter { buffer: [0; N] }
     }
-    pub fn filter_data(&self) -> u32 {
+}
+
+impl<const N: usize> FilterMethods for Filter<N> {
+    fn filter_data(&self) -> u32 {
         let sum: u32 = self.buffer.iter().map(|&x| x).sum();
         sum / self.buffer.len() as u32
     }
@@ -18,9 +26,9 @@ impl<const N: usize> Filter<N> {
 
 #[cfg(test)]
 mod tests {
+    use super::*;
     use crate::config::BUFFER_SIZE;
     use rstest::{fixture, rstest};
-    use super::*;
 
     #[fixture]
     fn filter() -> Filter<BUFFER_SIZE> {

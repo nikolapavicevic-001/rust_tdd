@@ -10,23 +10,28 @@ fn kelvin_to_celisus(kelvin: f32) -> f32 {
 #[cfg(test)]
 mod tests {
 
+    use rstest::rstest;
+
     use super::*;
-    #[test]
-    fn test_celsius_to_kelvin() {
-        assert_eq!(celsius_to_kelvin(0.0), 273.15);
-        assert_eq!(celsius_to_kelvin(3.0), 276.15);
-        assert_eq!(celsius_to_kelvin(-30.0), 243.15);
+    #[rstest]
+    #[case(0.0, 273.15)]
+    #[case(3.0, 276.15)]
+    #[case(-30.0, 243.15)]
+    fn test_celsius_to_kelvin(#[case] input: f32, #[case] expected: f32) {
+        assert_eq!(celsius_to_kelvin(input), expected);
     }
-    #[test]
-    fn test_celsius_decigrades_to_celsius() {
-        assert_eq!(celsius_decigrades_to_celsius(100.0), 10.0);
-        assert_eq!(celsius_decigrades_to_celsius(30.0), 3.0);
-        assert_eq!(celsius_decigrades_to_celsius(-10.0), -1.0);
+    #[rstest]
+    #[case(100.0, 10.0)]
+    #[case(30.0, 3.0)]
+    #[case(-10.0, -1.0)]
+    fn test_celsius_decigrades_to_celsius(#[case] input: f32, #[case] expected: f32) {
+        assert_eq!(celsius_decigrades_to_celsius(input), expected);
     }
-    #[test]
-    fn test_kelvin_to_celisus(){
-        assert_eq!(kelvin_to_celisus(273.15), 0.0);
-        assert_eq!(kelvin_to_celisus(276.15), 3.0);
-        assert_eq!(kelvin_to_celisus(243.15), -30.0);
+    #[rstest]
+    #[case(273.15, 0.0)]
+    #[case(276.15, 3.0)]
+    #[case(243.15, -30.0)]
+    fn test_kelvin_to_celisus(#[case] input: f32, #[case] expected: f32){
+        assert_eq!(kelvin_to_celisus(input), expected);
     }
 }
